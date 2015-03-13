@@ -1,0 +1,5 @@
+<%= div_for forum_post do%>
+  <p class="text-muted">Posted by <%= forum_post.user.username if forum_post.user.present?%> on  <%= local_time_ago(forum_post.created_at) %></p>
+  <%= markdownify forum_post.body %>
+  <%= link_to "Edit", edit_forum_thread_forum_post_path(forum_post.forum_thread.id, forum_post)%>
+<% end %>

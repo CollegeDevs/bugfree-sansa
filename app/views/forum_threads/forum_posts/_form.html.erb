@@ -1,0 +1,9 @@
+<%= form_for([@forum_thread, ForumPost.new]) do |f| %>
+
+  <div class="form-group">
+    <%= f.text_area :body, placeholder: "Add A Post", rows: 10,class: "form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit class: 'btn btn-primary'%>
+  </div>
+<% end %>

@@ -1,0 +1,9 @@
+<h2>Editing the Post</h2>
+<%= form_for([@forum_thread, @forum_post],:html => { :multipart => true }) do |f| %>
+  <div class="form-group">
+    <%= f.text_area :body, placeholder: "Add A Post", rows: 10,class: "form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit class: 'btn btn-primary'%>
+  </div>
+<% end %>
