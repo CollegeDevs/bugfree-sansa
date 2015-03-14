@@ -76,3 +76,4 @@ gem 'sanitize', '~> 3.1.2'
 gem "figaro"
 
 gem 'intercom-rails'
+gem 'omniauth-facebook'

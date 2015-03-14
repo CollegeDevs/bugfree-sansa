@@ -20,6 +20,8 @@
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  admin                  :boolean
+#  provider               :string
+#  uid                    :string
 #
 # Indexes
 #
@@ -32,7 +34,8 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, :omniauth_providers => [:facebook]
   validates :username, presence: true, uniqueness: { case_sensitive: false},
   					 length: { in: 3..9 }
 
@@ -40,6 +43,16 @@ class User < ActiveRecord::Base
   has_many :forum_threads
 
   has_many :owners, through: :forum_threads
+
+
+  def self.from_omniauth(auth)
+  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    user.email = auth.info.email
+    user.password = Devise.friendly_token[0,20]
+    user.username = auth.info.name   # assuming the user model has a name
+    #user.image = auth.info.image # assuming the user model has an image
+  end
+end
 
 
 end

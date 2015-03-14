@@ -20,6 +20,8 @@
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  admin                  :boolean
+#  provider               :string
+#  uid                    :string
 #
 # Indexes
 #
